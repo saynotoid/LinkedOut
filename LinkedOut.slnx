@@ -1,6 +1,3 @@
 <Solution>
-  <Folder Name="/.github/">
-	<File Path=".github/workflows/build.yml" />
-  </Folder>
   <Project Path="src/backend/LinkedOut.Api/LinkedOut.Api.csproj" Id="5afae2b2-3d23-4392-91e2-32a4e62803b3" />
 </Solution>
