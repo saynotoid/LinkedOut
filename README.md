@@ -1,10 +1,10 @@
 # LinkedOut 🚀
 
-![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=saynotoid_LinkedOut&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=saynotoid_LinkedOut)
-![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=saynotoid_LinkedOut&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=saynotoid_LinkedOut)
-![Bugs](https://sonarcloud.io/api/project_badges/measure?project=saynotoid_LinkedOut&metric=bugs)](https://sonarcloud.io/summary/new_code?id=saynotoid_LinkedOut)
-![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=saynotoid_LinkedOut&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=saynotoid_LinkedOut)
-![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=saynotoid_LinkedOut&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=saynotoid_LinkedOut)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=saynotoid_LinkedOut&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=saynotoid_LinkedOut)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=saynotoid_LinkedOut&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=saynotoid_LinkedOut)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=saynotoid_LinkedOut&metric=bugs)](https://sonarcloud.io/summary/new_code?id=saynotoid_LinkedOut)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=saynotoid_LinkedOut&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=saynotoid_LinkedOut)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=saynotoid_LinkedOut&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=saynotoid_LinkedOut)
 
 ---
 
