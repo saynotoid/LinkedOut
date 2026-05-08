@@ -3,6 +3,8 @@ namespace LinkedOut.Api
 {
     public partial class Program
     {
+        protected Program() { } //sonar
+
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
