@@ -1,0 +1,33 @@
+name: SonarQube
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build and analyze
+    runs-on: windows-latest
+    steps:
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: 'zulu'
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install SonarQube Cloud scanner
+        shell: powershell
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+      - name: Build and analyze
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
+          dotnet-sonarscanner begin /k:"saynotoid_LinkedOut" /o:"saynotoid" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build src/backend/LinkedOut.Api/LinkedOut.Api.csproj
+          dotnet-sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
