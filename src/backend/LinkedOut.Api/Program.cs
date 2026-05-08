@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
+
 namespace LinkedOut.Api
 {
     public partial class Program
@@ -15,12 +18,28 @@ namespace LinkedOut.Api
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
+            builder.Services.AddDbContext<AppDbContext>(options =>
+               options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             var app = builder.Build();
+
+            app.MapGet("/skills", async (AppDbContext db) =>
+            {
+                if (!db.Skills.Any())
+                {
+                    db.Skills.Add(new Entities.Skill { Name = ".NET 10", Category = "Backend" });
+                    await db.SaveChangesAsync();
+                }
+
+                return await db.Skills.ToListAsync();
+            })
+            .WithName("GetSkills");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.MapScalarApiReference();
             }
 
             app.UseHttpsRedirection();
