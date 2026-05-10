@@ -7,16 +7,39 @@ namespace LinkedOut.Api
     {
         public DbSet<Skill> Skills => Set<Skill>();
 
+        public DbSet<Company> Companies => Set<Company>();
+
+        public DbSet<Requirement> Requirements => Set<Requirement>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var entity = modelBuilder.Entity<Skill>();
+            // Навыки
+            modelBuilder.Entity<Skill>(entity =>
+            {
+                entity.ToTable("skills");
+                entity.Property(s => s.Id).HasColumnName("id");
+                entity.Property(s => s.Name).HasColumnName("name");
+                entity.Property(s => s.Category).HasColumnName("category");
+                entity.Property(s => s.CreatedAt).HasColumnName("created_at").ValueGeneratedOnAdd();
+            });
 
-            entity.ToTable("skills");
+            // Компании
+            modelBuilder.Entity<Company>(entity =>
+            {
+                entity.ToTable("companies");
+                entity.Property(c => c.Id).HasColumnName("id");
+                entity.Property(c => c.Name).HasColumnName("name");
+                entity.Property(c => c.Location).HasColumnName("location");
+            });
 
-            entity.Property(s=>s.Id).HasColumnName("id");
-            entity.Property(s => s.Name).HasColumnName("name");
-            entity.Property(s => s.Category).HasColumnName("category");
-            entity.Property(s => s.CreatedAt).HasColumnName("created_at").ValueGeneratedOnAdd();
+            // Требования
+            modelBuilder.Entity<Requirement>(entity =>
+            {
+                entity.ToTable("requirements");
+                entity.Property(r => r.Id).HasColumnName("id");
+                entity.Property(r => r.CompanyId).HasColumnName("company_id");
+                entity.Property(r => r.Title).HasColumnName("title");
+            });
         }
     }
 }
