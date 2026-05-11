@@ -1,4 +1,5 @@
 
+using LinkedOut.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -8,7 +9,7 @@ namespace LinkedOut.Api
     {
         protected Program() { } //sonar
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -23,14 +24,19 @@ namespace LinkedOut.Api
 
             var app = builder.Build();
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+                // Накатываем миграции автоматически
+                await db.Database.MigrateAsync();
+
+                // Применяем наш скрипт защиты RLS
+                await db.Database.ApplyGlobalRlsAsync();
+            }
+
             app.MapGet("/skills", async (AppDbContext db) =>
             {
-                if (!db.Skills.Any())
-                {
-                    db.Skills.Add(new Entities.Skill { Name = ".NET 10", Category = "Backend" });
-                    await db.SaveChangesAsync();
-                }
-
                 return await db.Skills.ToListAsync();
             })
             .WithName("GetSkills");
@@ -65,7 +71,7 @@ namespace LinkedOut.Api
             })
             .WithName("GetWeatherForecast");
 
-            app.Run();
+            await app.RunAsync();
         }
     }
 }
